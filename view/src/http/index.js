@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const $host = axios.create({
-    baseURL: '/'
+    baseURL: 'https://converter-algebra-tuples.herokuapp.com/'
 })
 
 const $authHost = axios.create({
-    baseURL: '/'
+    baseURL: 'https://converter-algebra-tuples.herokuapp.com/'
 })
 
 const authInterceptor = config => {
