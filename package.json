@@ -1,0 +1,38 @@
+{
+  "name": "conv",
+  "version": "1.0.0",
+  "description": "Conv",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "converter"
+  ],
+  "author": "Evelina Shaikamalova <mikstura98@mail.ru>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet-csp": "^3.4.0",
+    "mobx": "^6.2.0",
+    "mobx-react-lite": "^3.2.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "react-router-dom": "^5.2.0",
+    "sequelize": "^6.6.2",
+    "x-xss-protection": "^2.0.0"
+  },
+  "devDependencies": {
+    "bcrypt": "^5.0.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.7"
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  }
+}
