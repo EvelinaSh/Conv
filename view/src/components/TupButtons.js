@@ -48,7 +48,11 @@ const TupButtons = observer(() => {
     }
 
     const updateSaveQuery = () => {
-        getTup().then(data => queries.setTuples(data))
+        check().then(data => {
+            if (data.role === "ADMIN") getTup().then(data => queries.setTuples(data))
+            else
+                getTupUser(data.id).then(data => {queries.setTuples(data)})
+        })
     }
 
     const getQ = () => {
@@ -118,6 +122,15 @@ const TupButtons = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
+        queries.setTuples([])
+        queries.setGroup('')
+        queries.setFam('')
+        queries.setNom('')
+        queries.setDesc('')
+        queries.setType('')
+        queries.setGoal('')
+        queries.setQuery('')
+        queries.setQuerySQL('')
     }
 
 

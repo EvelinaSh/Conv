@@ -121,6 +121,14 @@ const AlgButtons = observer(() => {
         user.setUser({})
         user.setIsAuth(false)
         queries.setAlgs([])
+        queries.setGroup('')
+        queries.setFam('')
+        queries.setNom('')
+        queries.setDesc('')
+        queries.setType('')
+        queries.setGoal('')
+        queries.setQuery('')
+        queries.setQuerySQL('')
     }
 
     return (

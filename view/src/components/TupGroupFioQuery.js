@@ -13,12 +13,12 @@ const TupGroupFioQuery = observer(() => {
     const {queries} = useContext(Context)
 
     useEffect(() => {
-
-        check().then(data => {
-            getTupUser(data.id).then(data => {queries.setTuples(data)
-            console.log(data)})
+        if (user.isAuth === true)
+            check().then(data => {
+                if (data.role === "ADMIN") getTup().then(data => queries.setTuples(data))
+                else
+                getTupUser(data.id).then(data => {queries.setTuples(data)})
         })
-        getTup().then(data => queries.setTuples(data))
         queries.setSelectedAlg("Новый запрос")
     }, [queries])
 
