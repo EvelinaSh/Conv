@@ -12,16 +12,21 @@ const PORT = process.env.PORT || 5000
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use(express.static(path.resolve(__dirname, '../view/build')))
 app.use('/api', router)
 
 app.use(errorHandler)
 
-  app.get('*', function(request, response) {
-    response.sendFile(path.resolve(__dirname, '../view/build', 'index.html'));
-  });
+app.use(express.static(path.join(__dirname, './view/build')))
 
-const start = async () => {
+app.get('*', function(_, res) {
+  res.sendFile(path.join(__dirname, './view/build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+const startServer = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
@@ -31,4 +36,27 @@ const start = async () => {
     }
 }
 
-start()
+const startClusterServer = () => {
+  if (!cluster.isMaster) {
+    return startServer()
+  }
+
+  logger.info(`Master ${process.pid} is running`)
+  const numCPUs = os.cpus().length
+
+  logger.info(`Forking ${numCPUs} clusters`)
+
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork()
+  }
+
+  cluster.on('exit', (worker) => {
+    logger.info(`worker ${worker.process.pid} died`)
+  })
+}
+
+if (config.nodeClusterEnabled) {
+  startClusterServer()
+} else {
+  startServer()
+}
