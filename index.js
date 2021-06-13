@@ -17,11 +17,15 @@ app.use('/api', router)
 
 app.use(errorHandler)
 
+  app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../view/build', 'index.html'));
+  });
+
 const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
-        app.listen(PORT)
+        app.listen(PORT () => console.log(`Server started on port ${PORT}`))
     } catch (e) {
         console.log(e)
     }
