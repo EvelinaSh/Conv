@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Container, Form} from "react-bootstrap";
+import {Container, Form, Image} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -8,10 +8,11 @@ import {ALG_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE} from "../utils/consts";
 import {login, registration} from "../http/userAPI";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {getAlgUser} from "../http/convAPI";
+import arrow from "../arrow.png";
+
 
 const Auth = observer(() => {
-    const {user, queries} = useContext(Context)
+    const {user} = useContext(Context)
     const location = useLocation()
     const history = useHistory()
     const isLogin = location.pathname === LOGIN_ROUTE
@@ -43,8 +44,11 @@ const Auth = observer(() => {
             style={{height: window.innerHeight - 54}}
         >
             <Card style={{width: 600}} className="p-5">
+                <Row className="d-flex justify-content-between pl-3 mb-4">
+                    <Image onClick={() => history.push(ALG_ROUTE)} width={19} height={13} src={arrow}/>
+                </Row>
                 <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
-                <Form className="d-flex flex-column">
+                <Form className="d-flex flex-column mt-4">
                     <Form.Control
                         className="mt-3"
                         placeholder="Введите ваш email..."
@@ -58,7 +62,7 @@ const Auth = observer(() => {
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
-                    <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
+                    <Row className="d-flex justify-content-between mt-4 pl-3 pr-3">
                         {isLogin ?
                             <div>
                                 Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
@@ -75,6 +79,7 @@ const Auth = observer(() => {
                             {isLogin ? 'Войти' : 'Регистрация'}
                         </Button>
                     </Row>
+
 
                 </Form>
             </Card>

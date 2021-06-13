@@ -4,13 +4,9 @@ export default class User {
     constructor() {
         this._isAuth = false
         this._user = {}
-        this._id = {}
         makeAutoObservable(this)
     }
 
-    setId(id){
-        this._id = id
-    }
     setIsAuth(bool) {
         this._isAuth = bool
     }
