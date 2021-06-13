@@ -15,9 +15,10 @@ const AlgGroupFioQuery = observer(() => {
     useEffect(() => {
 
         check().then(data => {
+            if (data.role === "ADMIN") getAlg().then(data => queries.setAlgs(data))
+            else
             getAlgUser(data.id).then(data => {queries.setAlgs(data)})
         })
-        getAlg().then(data => queries.setAlgs(data))
         queries.setSelectedAlg("Новый запрос")
     }, [queries])
 

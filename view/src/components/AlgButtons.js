@@ -45,7 +45,9 @@ const AlgButtons = observer(() => {
     }
 
     const updateSaveQuery = () => {
+        if (user.user.role === "ADMIN")
         getAlg().then(data => queries.setAlgs(data))
+        else
         getAlgUser(user.user.id).then(data => {queries.setAlgs(data)})
     }
     const getQ = () => {
