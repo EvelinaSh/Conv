@@ -3,14 +3,14 @@ import {observer} from "mobx-react-lite";
 import {Col, Dropdown, Form, Row} from "react-bootstrap";
 import {useHistory} from "react-router-dom"
 import {Context} from "../index";
-import {getAlg, getAlgUser, getTup, getTupUser} from "../http/convAPI";
+import {getTup, getTupUser} from "../http/convAPI";
 import {check} from "../http/userAPI";
 
 
 
 const TupGroupFioQuery = observer(() => {
     const history = useHistory() //для перехода на другую страницу
-    const {queries} = useContext(Context)
+    const {queries, user} = useContext(Context)
 
     useEffect(() => {
         if (user.isAuth === true)

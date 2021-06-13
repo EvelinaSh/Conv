@@ -6,14 +6,14 @@ import {
     createTup,
     deleteTup,
     execute,
-    getTup,
+    getTup, getTupUser,
     updateTup,
     view
 } from "../http/convAPI";
 import convert_to_sql from "./TupleCalculusQuery";
 import {LOGIN_ROUTE} from "../utils/consts";
 import {useHistory} from "react-router-dom";
-
+import {check} from "../http/userAPI";
 
 const TupButtons = observer(() => {
 
