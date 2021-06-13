@@ -120,6 +120,7 @@ const AlgButtons = observer(() => {
     const logOut = () => {
         user.setUser({})
         user.setIsAuth(false)
+        queries.setAlgs([])
     }
 
     return (

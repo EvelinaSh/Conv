@@ -13,7 +13,7 @@ const AlgGroupFioQuery = observer(() => {
     const {queries, user} = useContext(Context)
 
     useEffect(() => {
-
+        if (user.isAuth === true)
         check().then(data => {
             if (data.role === "ADMIN") getAlg().then(data => queries.setAlgs(data))
             else
