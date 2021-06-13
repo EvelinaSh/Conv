@@ -26,7 +26,7 @@ app.get('*', function(_, res) {
   })
 })
 
-const startServer = async () => {
+const start = async () => {
     try {
         await sequelize.authenticate()
         await sequelize.sync()
@@ -36,27 +36,5 @@ const startServer = async () => {
     }
 }
 
-const startClusterServer = () => {
-  if (!cluster.isMaster) {
-    return startServer()
-  }
 
-  logger.info(`Master ${process.pid} is running`)
-  const numCPUs = os.cpus().length
-
-  logger.info(`Forking ${numCPUs} clusters`)
-
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork()
-  }
-
-  cluster.on('exit', (worker) => {
-    logger.info(`worker ${worker.process.pid} died`)
-  })
-}
-
-if (config.nodeClusterEnabled) {
-  startClusterServer()
-} else {
-  startServer()
-}
+start()
